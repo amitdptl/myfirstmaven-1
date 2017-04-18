@@ -8,6 +8,13 @@ import org.testng.Assert;
  */
 public class HomePage extends Utils {
 
+    public void changeCurrencyToEuro()
+    {
+
+        selectText(By.xpath("//select[@id='customerCurrency']"),"Euro");
+        Assert.assertTrue(driver.findElement(By.xpath("//select[@id='customerCurrency']/option[2]")).isSelected(),"yes");
+    }
+
     public void clickOnRegistration()
     {
         //click on register button on home page from top right corner.
@@ -71,5 +78,14 @@ public class HomePage extends Utils {
         clickOnElement(By.xpath("//a[@href='/electronics']"));
         //verify that User is navigated to Electronics page
         assertByGetText(By.cssSelector("h1"),"Electronics","User is not navigated to Electronics page");
+    }
+
+    public void clickOnJewelry()
+    {
+        //click on Jewelry  in Home page from top menu bar
+        clickOnElement(By.xpath("//a[@href='/jewelry']"));
+        //verify that User is navigated to Electronics page
+        assertByGetText(By.cssSelector("h1"),"Jewelry","User is not navigated to Jewelry page");
+
     }
 }

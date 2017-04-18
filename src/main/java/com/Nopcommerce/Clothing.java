@@ -14,14 +14,14 @@ public class Clothing extends Utils {
         SoftAssert softAssert = new SoftAssert();
 
         //sorting price Low to high
-        selectText(By.id("products-orderby"), "Price: High to Low");
+        productSortBy("Price: High to Low");
 
         //verify sorting price High to Low
         softAssert.assertTrue(descendingOrderOrHighToLow(By.xpath("//div[@class='item-grid']//span")),
                 "Product is not sorted Hight to Low");
 
         //Display 3 item per page
-        selectText(By.id("products-pagesize"),"3");
+        displayNoOfItemPerPage(3);
 
         //click on list view
         clickOnElement(By.cssSelector("a.viewmode-icon.list"));
@@ -30,7 +30,7 @@ public class Clothing extends Utils {
         softAssert.assertTrue(driver.getCurrentUrl().contains("list"));
 
         //sorting price Low to high
-        selectText(By.id("products-orderby"), "Price: Low to High");
+        productSortBy("Price: Low to High");
 
         //verify product is in Low to high price order
         softAssert.assertTrue(ascendingOrLowToHigh(By.xpath("//div[@class='item-grid']//span")),"Product is not sorted Price : Low to High");

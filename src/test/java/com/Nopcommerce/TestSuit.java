@@ -163,7 +163,17 @@ public class TestSuit extends BaseTest{
 
     }
 
-
-
-
+    @Test
+    public void changeCurrencyToEuroAndCheckingAllProductPriceShowingInEuro()
+    {
+        homePage.changeCurrencyToEuro();
+        homePage.clickOnApparel();
+        apparel.clickOnClothingFromLeftSideMenu();
+        Assert.assertTrue(utils.Euro().equals("€"),
+                "Clothing department's Currency is not changed to Euro as still product price is US Dollar");
+        homePage.clickOnComputerDepartment();
+        computersPage.clickOnNotebooks();
+        Assert.assertTrue(utils.Euro().equals("€"),
+                "Notebooks department's Currency is not changed to Euro as still product price is US Dollar");
+    }
 }

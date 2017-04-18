@@ -278,7 +278,7 @@ public class Utils extends BasePage {
         driver.navigate().refresh();
     }
 
-    //product sort by on on any product page
+    //product sort by on any product page
     public static void productSortBy(String sortBy)
     {
         if(sortBy.equalsIgnoreCase("Name: A to Z"))
@@ -335,7 +335,8 @@ public class Utils extends BasePage {
         return isSorted;
     }
 
-    //Reusable method for to check whether product is in Ascending order OR Low to High Price, answer will get in true Or False
+    //Reusable method for to check whether product is in Descending order OR  High  to Low Price,
+    // answer will get in true Or False
     public static boolean descendingOrderOrHighToLow(By by)
     {
         List<WebElement> productsNames_WebElement = driver.findElements(by);
@@ -352,11 +353,11 @@ public class Utils extends BasePage {
         return isSorted;
     }
 
-
+    //Reusable method to separate currency symbol from price and convert price in double
     public static double separatingCurrencySignFromPrice(By by) {
-        //taking price of the product and separating "$" sign.
+        //taking price of the product
         String firstPhonePrice = getText(by);
-        //Converting first phone price from string to Integer due to $ sing next to price.
+        //Converting price from string to Integer due to $ sing next to price.
         StringBuilder firstPhoneValue = new StringBuilder();
         StringBuilder currencySymbol = new StringBuilder();
         for (char a : firstPhonePrice.toCharArray()) {
@@ -367,9 +368,56 @@ public class Utils extends BasePage {
             }
         }
         String a1 = firstPhoneValue.toString();
-        //first phone price in integer without currency symbol
+        //price in double without currency symbol
         double result = Double.parseDouble(a1);
         return result;
+    }
+
+    //Reusable method to separate currency symbol from price and
+    public static String separatingCurrencySymbol(By by) {
+        //taking price of the product
+        String firstPhonePrice = getText(by);
+        //separating $sign and price digits.
+        StringBuilder firstPhoneValue = new StringBuilder();
+        StringBuilder currencySymbol = new StringBuilder();
+        for (char a : firstPhonePrice.toCharArray()) {
+            if (Character.isDigit(a) || a == '.') {
+                firstPhoneValue.append(a);
+            } else {
+                currencySymbol.append(a);
+            }
+        }
+        String a1 = firstPhoneValue.toString();
+        return a1;
+    }
+
+
+    public String Euro()
+    {
+        List<WebElement> productsNames_WebElement = driver.findElements(By.xpath("//div[@class='item-grid']//span"));
+        List<String> product_Price = new ArrayList<String>();
+        for (WebElement e :productsNames_WebElement) {
+            String s = e.getText();
+            product_Price.add(s);
+        }
+
+        String a2="€";
+        for (String  e: product_Price){
+            StringBuilder currencySymbol = new StringBuilder();
+            for (char a : e.toCharArray()) {
+                if(a=='€' || a=='$')
+                {
+                    currencySymbol.append(a);
+                }
+            }
+            String a1 = currencySymbol.toString();
+            //System.out.println(a1);
+            if(a1.equalsIgnoreCase("$"))
+            {
+                a2="$";
+            }
+        }
+        return a2;
     }
 
 //    //Reusable method to scroll page not working
