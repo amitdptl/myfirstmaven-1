@@ -56,6 +56,7 @@ public class CellPhones extends Utils {
 
         //verifying that cellphone added in cart by comparing message
         softAssert.assertEquals("The product has been added to your shopping cart", getText(By.xpath("//body/div[5]/p")));
+
         refreshWebPage();
 
         //adding third cell phone in the cart
